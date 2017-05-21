@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class Conexion {
+public class ConexionEjemplo {
 	public static void main(String[] args) {
 		Connection conexion = null;
 		String baseDatos = "jdbc:mysql://localhost:3306/registrodirecciones?serverTimezone=UTC";
