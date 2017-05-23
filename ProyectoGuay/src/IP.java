@@ -3,8 +3,8 @@ import java.net.*;
 /*
 * Objetivos de la clase:
 * 	Conseguir la IP local
-* 	Conseguir la máscara de red
-* 	*** EXTRAS PARA AÑADIR *** 
+* 	Conseguir la mï¿½scara de red
+* 	*** EXTRAS PARA Aï¿½ADIR *** 
 * 	Conseguir la MAC
 */
 public class IP {
@@ -38,6 +38,16 @@ public class IP {
 			subnetMask = "undefined";
 		}
 	}
+	private void setMac(String[] args) throws Exception {
+	    InetAddress address = InetAddress.getLocalHost();
+
+	    NetworkInterface ni = NetworkInterface.getByInetAddress(address);
+	    byte[] mac = ni.getHardwareAddress();
+
+	    for (int i = 0; i < mac.length; i++) {
+	      System.out.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : "");
+	    }
+	  }
 
 	public void readLocalHost() {
 		System.out.println(localhost);
