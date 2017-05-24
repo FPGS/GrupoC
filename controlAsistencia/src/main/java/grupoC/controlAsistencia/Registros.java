@@ -32,7 +32,7 @@ public class Registros {
 		
 	}
 	private void iniciarConexion() throws SQLException{
-		String baseDatos = "jdbc:mysql://localhost:3306/registrodirecciones?serverTimezone=UTC";
+		String baseDatos = "jdbc:mysql://localhost:3306/registros?serverTimezone=UTC";
 		String usuario = "root";
 		String clave = "";
 		conexion = DriverManager.getConnection(baseDatos, usuario, clave);

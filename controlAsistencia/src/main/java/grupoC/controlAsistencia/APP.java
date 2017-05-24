@@ -11,6 +11,7 @@ public class APP {
 			ip.readLocalHost();
 			ip.readLocalHostAdress();
 			ip.readSubnetMask();
+			saveRegistros.insert(ip.getLocalHost().toString(),ip.getLocalHostAdress(),ip.getSubnetMask());
 		} catch (UnknownHostException e) { e.printStackTrace(); }		
 		
 		Registros con = new Registros();
