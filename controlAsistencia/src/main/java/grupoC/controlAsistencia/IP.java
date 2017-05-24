@@ -11,12 +11,13 @@ import java.net.*;
 */
 public class IP {
 	private InetAddress localhost;
-	private String localHostAdress, subnetMask;
+	private String localHostAdress, subnetMask,macAdress;
 
-	public IP() throws UnknownHostException {
+	public IP() throws UnknownHostException, SocketException {
 		setLocalHost();
 		setLocalHostAdress();
 		setSubnetMask();
+		setMac();
 	}
 
 	private void setLocalHost() throws UnknownHostException {
@@ -40,10 +41,21 @@ public class IP {
 			subnetMask = "undefined";
 		}
 	}
+	private void setMac() throws SocketException{
+		NetworkInterface ni=NetworkInterface.getByInetAddress(localhost);
+		byte[] mac=ni.getHardwareAddress();
+		for (int i = 0; i < mac.length; i++) {
+			this.macAdress+=mac[i];
+		}
+	}
 
 	public void readLocalHost() {
 		System.out.println(localhost);
 	}
+	public void readMacAdress() {
+		System.out.println(macAdress);
+	}
+
 
 	public void readLocalHostAdress() {
 		System.out.println(localHostAdress);
@@ -63,5 +75,8 @@ public class IP {
 
 	public String getSubnetMask(){
 		return subnetMask;
+	}
+	public String getMac(){
+		return macAdress;
 	}
 }
