@@ -31,6 +31,14 @@ public class Registros {
 		}
 		
 	}
+	private void setFecha(){
+		Date fecha = new Date();
+		DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+	}
+	
+	public void readFecha() {
+		System.out.println(hourdateFormat.format(fecha));
+	}
 	private void iniciarConexion() throws SQLException{
 		String baseDatos = "jdbc:mysql://localhost:3306/registrodirecciones?serverTimezone=UTC";
 		String usuario = "root";
