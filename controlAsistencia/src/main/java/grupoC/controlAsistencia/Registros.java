@@ -5,14 +5,19 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class Registros {
 	
 	private Connection conexion = null;
+	private String fecha;
 	
 	public Registros() throws SQLException{
 		iniciarConexion();
+		setFecha();
 	}
 	
 	public void realizarConsultaLectura(String consulta) throws SQLException{
@@ -31,6 +36,14 @@ public class Registros {
 		}
 		
 	}
+	
+	private void setFecha(){
+		Date fecha = new Date();
+		DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+		this.fecha = hourdateFormat.format(fecha);
+		System.out.println(fecha);
+	}
+	
 	private void iniciarConexion() throws SQLException{
 		String baseDatos = "jdbc:mysql://localhost:3306/registrodirecciones?serverTimezone=UTC";
 		String usuario = "root";
