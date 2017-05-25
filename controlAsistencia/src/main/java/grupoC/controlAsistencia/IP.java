@@ -1,6 +1,7 @@
 package grupoC.controlAsistencia;
 
 import java.net.*;
+import java.util.*;
 
 /*
 * Objetivos de la clase:
@@ -11,12 +12,22 @@ import java.net.*;
 */
 public class IP {
 	private InetAddress localhost;
-	private String localHostAdress, subnetMask;
+	private String localHostAdress, subnetMask,macAdress;
 
-	public IP() throws UnknownHostException {
+	public IP() throws UnknownHostException, SocketException {
 		setLocalHost();
 		setLocalHostAdress();
 		setSubnetMask();
+		setMac();
+	}
+	
+	public IP(String inter) throws UnknownHostException, SocketException {
+		Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+        for (NetworkInterface netint : Collections.list(nets)) {
+            displayInterface(netint, inter);
+    	}
+        setSubnetMask();
+		setMac();
 	}
 
 	private void setLocalHost() throws UnknownHostException {
@@ -40,10 +51,21 @@ public class IP {
 			subnetMask = "undefined";
 		}
 	}
+	private void setMac() throws SocketException{
+		NetworkInterface ni=NetworkInterface.getByInetAddress(localhost);
+		byte[] mac=ni.getHardwareAddress();
+		for (int i = 0; i < mac.length; i++) {
+			this.macAdress+=mac[i];
+		}
+	}
 
 	public void readLocalHost() {
 		System.out.println(localhost);
 	}
+	public void readMacAdress() {
+		System.out.println(macAdress);
+	}
+
 
 	public void readLocalHostAdress() {
 		System.out.println(localHostAdress);
@@ -64,4 +86,18 @@ public class IP {
 	public String getSubnetMask(){
 		return subnetMask;
 	}
+	public String getMac(){
+		return macAdress;
+	}
+	
+	static void displayInterface(NetworkInterface netint, String inter) throws SocketException {
+        if(inter.equals(netint.getName())) {
+            System.out.printf("Display name: %s\n", netint.getDisplayName());
+            Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+            //Functional programming
+            Collections.list(inetAddresses).forEach((InetAddress inetAddress) -> {
+                System.out.printf("InetAddress: %s\n", inetAddress);
+            });
+        }
+    }
 }

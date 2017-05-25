@@ -15,6 +15,13 @@ public class Registros {
 		iniciarConexion();
 	}
 	
+	public void consultaInserccion(String ip, String mascara, String nombreHost, String fecha) throws SQLException{
+		String sql = "INSERT INTO registros " + "(fechaRegistro, direccionIP, mascaraRed, nombreHost) VALUES ("+fecha+","+ip+","+mascara+","+nombreHost+")";
+		Statement sentencia = conexion.createStatement();
+		sentencia.executeQuery(sql);
+		
+	}
+	
 	public void realizarConsulta(String consulta) throws SQLException{
 		Statement sentencia = conexion.createStatement();
 		ResultSet respuesta = sentencia.executeQuery(consulta);

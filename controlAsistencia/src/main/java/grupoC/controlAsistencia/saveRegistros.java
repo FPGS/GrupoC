@@ -2,6 +2,8 @@ package grupoC.controlAsistencia;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Calendar;
+
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 
@@ -19,6 +21,10 @@ public class saveRegistros {
 		String baseDatos = "jdbc:mysql://localhost:3306/registros?serverTimezone=UTC";
 		String usuario = "root";
 		String clave = "";
+		Calendar rightNow = Calendar.getInstance();
+		String ahora = rightNow.get(Calendar.YEAR)+"-"+rightNow.get(Calendar.MONTH)+"-"+rightNow.get(Calendar.DATE)+" "+rightNow.get(Calendar.HOUR)+":"+rightNow.get(Calendar.MINUTE)+":"+rightNow.get(Calendar.SECOND);
+
+		System.out.println(ahora);
 		try{
 			conexion = DriverManager.getConnection(baseDatos, usuario, clave);
 			try (PreparedStatement ps = conexion.prepareStatement(sql)) {
