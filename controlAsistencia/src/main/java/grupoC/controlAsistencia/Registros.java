@@ -15,7 +15,7 @@ public class Registros {
 		iniciarConexion();
 	}
 	
-	public void realizarConsulta(String consulta) throws SQLException{
+	public void realizarConsultaLectura(String consulta) throws SQLException{
 		Statement sentencia = conexion.createStatement();
 		ResultSet respuesta = sentencia.executeQuery(consulta);
 		while(respuesta.next()){

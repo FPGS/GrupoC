@@ -16,7 +16,6 @@ public class APP {
 		} catch (UnknownHostException e) { e.printStackTrace(); }		
 		
 		Registros con = new Registros();
-		con.realizarConsulta("SELECT * FROM registros");
 		con.cerrarConexion();
 	}
 }
