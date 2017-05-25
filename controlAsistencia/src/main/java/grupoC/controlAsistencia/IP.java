@@ -1,6 +1,7 @@
 package grupoC.controlAsistencia;
 
 import java.net.*;
+import java.util.*;
 
 /*
 * Objetivos de la clase:
@@ -17,6 +18,15 @@ public class IP {
 		setLocalHost();
 		setLocalHostAdress();
 		setSubnetMask();
+		setMac();
+	}
+	
+	public IP(String inter) throws UnknownHostException, SocketException {
+		Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+        for (NetworkInterface netint : Collections.list(nets)) {
+            displayInterface(netint, inter);
+    	}
+        setSubnetMask();
 		setMac();
 	}
 
@@ -79,4 +89,15 @@ public class IP {
 	public String getMac(){
 		return macAdress;
 	}
+	
+	static void displayInterface(NetworkInterface netint, String inter) throws SocketException {
+        if(inter.equals(netint.getName())) {
+            System.out.printf("Display name: %s\n", netint.getDisplayName());
+            Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+            //Functional programming
+            Collections.list(inetAddresses).forEach((InetAddress inetAddress) -> {
+                System.out.printf("InetAddress: %s\n", inetAddress);
+            });
+        }
+    }
 }
