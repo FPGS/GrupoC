@@ -30,6 +30,10 @@ public class Registros {
 			System.out.printf("Registro: %d | Fecha: %s: | Ip: %s | Mascara: %s | Host: %s | Comentario: %s \n", registro, fecha, ip, mascara, host, comentario);
 		}
 		
+	public void consultaUpdate(String ip,String mascara, String nombreHost, String fecha) throws SQLException{
+		String sql2= "UPDATE INTO registros"+"(fechaRegistro, direccionIP, mascaraRed, nombreHost) VALUES ("+fecha+","+ip+","+mascara+","+nombreHost+")"; 
+		Statement sentencia = conexion.createStatement();
+		sentencia.executeQuery(sql);
 	}
 	private void iniciarConexion() throws SQLException{
 		String baseDatos = "jdbc:mysql://localhost:3306/registrodirecciones?serverTimezone=UTC";
