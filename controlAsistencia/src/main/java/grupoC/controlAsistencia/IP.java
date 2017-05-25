@@ -48,6 +48,15 @@ public class IP {
 			this.macAdress+=mac[i];
 		}
 	}
+	
+	private void setFecha(){
+		Date fecha = new Date();
+		DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+	}
+	
+	public void readFecha() {
+		System.out.println(hourdateFormat.format(fecha));
+	}
 
 	public void readLocalHost() {
 		System.out.println(localhost);
@@ -55,7 +64,6 @@ public class IP {
 	public void readMacAdress() {
 		System.out.println(macAdress);
 	}
-
 
 	public void readLocalHostAdress() {
 		System.out.println(localHostAdress);
