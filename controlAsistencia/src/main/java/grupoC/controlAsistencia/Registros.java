@@ -45,12 +45,11 @@ public class Registros {
 	}
 	
 	private void iniciarConexion() throws SQLException{
-		String baseDatos = "jdbc:mysql://localhost:3306/registrodirecciones?serverTimezone=UTC";
+		String baseDatos = "jdbc:mysql://localhost:3306/registros?serverTimezone=UTC";
 		String usuario = "root";
 		String clave = "";
 		conexion = DriverManager.getConnection(baseDatos, usuario, clave);
 		System.out.println("He entrado a la base de datos");
-		
 		System.out.println("NO OLVIDAR CERRAR LA CONEXIÓN USANDO EL MÉTODO .cerrarConexion() !!!!!!!");
 	}
 	public void consultaUpdate(String ip,String mascara, String nombreHost) throws SQLException{
