@@ -53,7 +53,20 @@ public class Registros {
 		
 		System.out.println("NO OLVIDAR CERRAR LA CONEXIÓN USANDO EL MÉTODO .cerrarConexion() !!!!!!!");
 	}
+	public void consultaUpdate(String ip,String mascara, String nombreHost) throws SQLException{
+		String fecha = this.fecha;
+		String sql2= "UPDATE INTO registros"+"(fechaRegistro, direccionIP, mascaraRed, nombreHost) VALUES ("+fecha+","+ip+","+mascara+","+nombreHost+")"; 
+		Statement sentencia = conexion.createStatement();
+		sentencia.executeQuery(sql2);
+	}
 	
+	public void consultaInserccion(String ip, String mascara, String nombreHost) throws SQLException{
+		String fecha = this.fecha;
+		String sql = "INSERT INTO registros " + "(fechaRegistro, direccionIP, mascaraRed, nombreHost) VALUES ("+fecha+","+ip+","+mascara+","+nombreHost+")";
+		Statement sentencia = conexion.createStatement();
+		sentencia.executeQuery(sql);
+		
+	}
 	public void cerrarConexion() throws SQLException{
 		conexion.close();
 		System.out.println("He cerrado la conexión");
