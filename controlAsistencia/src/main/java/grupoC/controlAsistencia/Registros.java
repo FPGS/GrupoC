@@ -1,7 +1,9 @@
 package grupoC.controlAsistencia;
 
+import java.net.Inet4Address;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,15 +58,34 @@ public class Registros {
 		String fecha = this.fecha;
 		String sql2= "UPDATE INTO registros"+"(fechaRegistro, direccionIP, mascaraRed, nombreHost) VALUES ("+fecha+","+ip+","+mascara+","+nombreHost+")"; 
 		Statement sentencia = conexion.createStatement();
-		sentencia.executeQuery(sql2);
+		sentencia.executeUpdate(sql2);
 	}
 	
-	public void consultaInserccion(String ip, String mascara, String nombreHost) throws SQLException{
-		String fecha = this.fecha;
-		String sql = "INSERT INTO registros " + "(fechaRegistro, direccionIP, mascaraRed, nombreHost) VALUES ("+fecha+","+ip+","+mascara+","+nombreHost+")";
-		Statement sentencia = conexion.createStatement();
-		sentencia.executeQuery(sql);
-		
+	public void consultaInserccion(IP ip) throws SQLException{
+            String direccion = ip.getLocalHostAdress();
+            String host = ip.getLocalHostName();
+            String mascara = ip.getSubnetMask();
+            String sql = "INSERT INTO registros (fechaRegistro, direccionIP, mascaraRed, nombreHost) VALUES (?,?,?,?)";
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            sentencia.setString(1, fecha);
+            sentencia.setString(2, direccion);
+            sentencia.setString(3, host);
+            sentencia.setString(4, mascara);
+            sentencia.execute();
+	}
+        
+       public void consultaInserccion(IP ip, String comentario) throws SQLException{
+            String direccion = ip.getLocalHostAdress();
+            String host = ip.getLocalHostName();
+            String mascara = ip.getSubnetMask();
+            String sql = "INSERT INTO registros (fechaRegistro, direccionIP, mascaraRed, nombreHost, comentarios) VALUES (?,?,?,?,?)";
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            sentencia.setString(1, fecha);
+            sentencia.setString(2, direccion);
+            sentencia.setString(3, host);
+            sentencia.setString(4, mascara);
+            sentencia.setString(5, comentario);
+            sentencia.execute();
 	}
 	public void cerrarConexion() throws SQLException{
 		conexion.close();

@@ -8,15 +8,12 @@ public class APP {
 
 	public static void main(String[] args) throws SQLException, SocketException {
 		try {
-			IP ip = new IP();
-			ip.readLocalHost();
-			ip.readLocalHostAdress();
-			ip.readSubnetMask();
-			ip.readMacAdress();
+		IP ip = new IP();
+                Registros con = new Registros();
+                con.consultaInserccion(ip);
+                con.consultaInserccion(ip, "existo");
+		con.cerrarConexion();
 		} catch (UnknownHostException e) { e.printStackTrace(); }		
 		
-		Registros con = new Registros();
-		con.realizarConsultaLectura("SELECT * FROM registros");
-		con.cerrarConexion();
 	}
 }

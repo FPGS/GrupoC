@@ -2,30 +2,26 @@ package grupoC.controlAsistencia;
 
 import java.net.*;
 
-/*
-* Objetivos de la clase:
-* 	Conseguir la IP local
-* 	Conseguir la m�scara de red
-* 	*** EXTRAS PARA A�ADIR *** 
-* 	Conseguir la MAC
-*/
 public class IP {
 	private InetAddress localhost;
-	private String localHostAdress, subnetMask,macAdress;
+	private String localHostAdress, subnetMask,macAdress, localHostName;
 
 	public IP() throws UnknownHostException, SocketException {
 		setLocalHost();
 		setLocalHostAdress();
+                setLocalHostName();
 		setSubnetMask();
 		setMac();
 	}
 
+        // Métodos set para establecer los valores
 	private void setLocalHost() throws UnknownHostException {
 		this.localhost = Inet4Address.getLocalHost();
 	}
 
 	private void setLocalHostAdress() throws UnknownHostException {
 		this.localHostAdress = InetAddress.getLocalHost().getHostAddress();
+                
 	}
 
 	private void setSubnetMask() {
@@ -41,7 +37,12 @@ public class IP {
 			subnetMask = "undefined";
 		}
 	}
-	private void setMac() throws SocketException{
+	
+        private void setLocalHostName() throws UnknownHostException{
+            this.localHostName = InetAddress.getLocalHost().getHostName();
+        }
+        
+        private void setMac() throws SocketException{
 		NetworkInterface ni=NetworkInterface.getByInetAddress(localhost);
 		byte[] mac=ni.getHardwareAddress();
 		for (int i = 0; i < mac.length; i++) {
@@ -49,11 +50,12 @@ public class IP {
 		}
 	}
 
-
+        // Métodos read para sacar los valores *por consola*
 	public void readLocalHost() {
 		System.out.println(localhost);
 	}
-	public void readMacAdress() {
+	
+        public void readMacAdress() {
 		System.out.println(macAdress);
 	}
 
@@ -65,6 +67,10 @@ public class IP {
 		System.out.println(subnetMask);
 	}
 	
+        public void readLocalHostName(){
+            System.out.println(localHostName);
+        }
+        // Métodos get para *devolver* los valores
 	public InetAddress getLocalHost() {
 		return localhost;
 	}
@@ -76,7 +82,12 @@ public class IP {
 	public String getSubnetMask(){
 		return subnetMask;
 	}
-	public String getMac(){
+	
+        public String getMac(){
 		return macAdress;
 	}
+    
+        public String getLocalHostName(){
+            return localHostName;
+        }
 }
